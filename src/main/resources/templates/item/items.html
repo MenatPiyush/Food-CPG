@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Items</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Item Management</div>
+
+        <p></p>
+        <a href="/add-item">
+            <button class="btn btn-primary float-right mb-2">Add New Item</button>
+        </a>
+        <div th:if="${items.size() == 0}">No items are available! Please add a new item!</div>
+        <div th:if="${items.size() > 0}">
+            <h4>Items</h4>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Cooking Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="'$' + ${item.cookingCost}"></td>
+                    <td th:text="'$' + ${item.totalCost}"></td>
+                    <td><a th:href="@{/item/delete/{id}(id=${item.id})}"><i class="fa fa-trash fa-lg pl-2"
+                                                                            aria-hidden="true"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

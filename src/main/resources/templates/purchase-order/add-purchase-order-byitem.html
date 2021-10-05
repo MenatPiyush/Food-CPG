@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Purchase Orders</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Purchase Order Management</span>
+
+        <p></p>
+        <div class="pl-3">
+            <form th:action="@{/save-purchase-order-byitem}" th:object="${purchaseOrderByItem}" method="post" class="row">
+                <div class="col-6">
+                    <div class="row mr-2">
+                        <label class="col-form-label col-3">Item:</label>
+                        <select class="form-control col-4" th:field="*{itemId}">
+                            <option th:each="i : ${items}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-3">Quantity<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-2" type="number" step="1" th:field="*{itemQuantity}"/>
+                    </div>
+                    <div class="row mt-2">
+                        <button class="btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Create Order</button>
+                        <a class="float-right mr-2" href="/purchase-orders"><button class="btn btn-primary" type="button">Cancel</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

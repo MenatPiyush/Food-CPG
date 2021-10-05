@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Items</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Item Management</span>
+        <div class="pl-3">
+            <form class="row" th:action="@{/save-item}" th:object="${item}" method="post">
+                <div class="col-4">
+                    <div class="row ">
+                        <label class="col-form-label col-5">Name <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-5" type="text" th:field="*{name}"/>
+                        <!--<span class="col-4 text-danger" th:text="*{errors['name']}"></span>-->
+                    </div>
+                    <div class="row mt-2">
+                    <label class="col-form-label col-5">Cooking Cost <sup class="text-danger">*</sup></label>
+                    <input class="form-control col-5" type="text" th:field="*{cookingCost}"/>
+                    <!--<span class="col-4 text-danger" th:text="*{errors['name']}"></span>-->
+                    </div>
+                </div>
+                <div class="col-4" th:object="${itemRawMaterial}">
+                    <div class="row">
+                        <div class="col-5 row form-group">
+                            <label class="col-form-label col-6">Vendor: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <select class="form-control col-5" th:field="*{vendorId}">
+                            <option th:each="i : ${vendors}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-5 row form-group">
+                            <label class="col-form-label col-6">Raw Material: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <select class="form-control col-5" th:field="*{rawMaterialId}">
+                            <option th:each="i : ${rawMaterials}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4" th:object="${itemRawMaterial}">
+                    <div class="row">
+                        <label class="col-form-label col-3">Quantity<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-3 mr-2" type="number" step=".10" th:field="*{rawMaterialQuantity}"/>
+                        <select class="form-control col-2" th:field="*{rawMaterialQuantityUOM}">
+                            <option th:each="i : ${units}" th:value="${i.alias}" th:text="${i.alias}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-10 justify-content-end">
+                            <button class="btn btn-primary float-right mr-6 " name="action" th:formaction="'/add-item-raw-material'" value="addToList" type="submit">Add To List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pl-3 col-12">
+                    <h4>Ingredients </h4>
+                    <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">Raw Material Name</th>
+                            <th scope="col">Unit cost</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Unit of Measurement</th>
+                            <th scope="col">Cost</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="rawMaterial, itemStat : *{itemRawMaterials}">
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].itemId}"/>
+                            <td th:text="${rawMaterial.rawMaterialId}"></td>
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].rawMaterialId}"/>
+                            <td th:text="${rawMaterial.rawMaterialUnitCost}"></td>
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].rawMaterialUnitCost}"/>
+                            <td th:text="${rawMaterial.rawMaterialQuantity}"></td>
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].rawMaterialQuantity}"/>
+                            <td th:text="${rawMaterial.rawMaterialQuantityUOM}"></td>
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].rawMaterialQuantityUOM}"/>
+                            <td th:text="${rawMaterial.cost}"></td>
+                            <input class="form-control col-4" type="hidden" th:field="*{itemRawMaterials[__${itemStat.index}__].cost}"/>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-9 mt-3">
+                    <div class="row">
+                    <label class="col-form-label col-2">Total Cost: <sup class="text-danger">*</sup></label>
+                    <input class="form-control col-3" type="hidden" th:field="*{totalCost}"/>
+                        <label class="col-form-label col-2 pl-0" th:text="*{totalCost}"></label>
+                    <button class="btn btn-primary col-3 ml-3" name="action" th:formaction="'/calculate-total-item-cost'" value="calculateTotal" type="submit">Calculate total amount</button>
+                    </div>
+                </div>
+                <div class="col-6 mt-4">
+                        <a class="col-1 float-right mr-1" href="/items"><button class="btn btn-primary" type="button">Cancel</button></a>
+                        <button class="btn btn-primary float-right mr-2" name="action" value="submit" type="submit">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Item Inventory</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Item Inventory Management</span>
+        <div class="pl-3">
+            <form class="row" th:action="@{/save-items-inventory-quantity}" th:object="${itemInventory}" method="post">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-5 row form-group">
+                            <label class="col-form-label col-6">Item: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <select class="form-control col-5" th:field="*{itemId}">
+                            <option th:each="i : ${item}" th:value="${i.Id}" th:text="${i.Name}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-5">Quantity: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-5" type="text" th:field="*{itemQuantity}"/>
+                    </div>
+                </div>
+                <div class="col-6 mt-4">
+                    <a class="col-1 float-right mr-1" href="/items-inventory"><button class="btn btn-primary" type="button">Cancel</button></a>
+                    <button class="btn btn-primary float-right mr-2" name="action" value="submit" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

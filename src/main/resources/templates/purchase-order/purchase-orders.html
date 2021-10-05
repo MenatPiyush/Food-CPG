@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Purchase Orders</div>
+
+        <p></p>
+        <a href="/add-purchase-order-byitem"><button class="btn btn-primary float-right mb-2">Create Item Order</button></a>
+        <a href="/add-purchase-order"><button class="btn btn-primary float-right mb-2 mr-2">Create New Order</button></a>
+        <div class="pl-3" th:switch="${purchaseOrder}">
+            <h5 th:case="null">No Purchase Order , Create a new Order.</h5>
+            <div th:case="*">
+                <h4>Open Orders</h4>
+                <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${openPurchaseOrders}">
+                        <td th:text="${order.orderNumber}"></td>
+                        <td th:text="'$' + ${order.totalCost}"></td>
+                        <td th:text="${order.statusChangeDate}"></td>
+                        <td><a th:href="@{/purchase-orders/delete/{id}(id=${order.orderNumber})}"><i class="fa fa-trash fa-lg pl-2" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/purchase-orders/move/{id}(id=${order.orderNumber})}"><button class="btn btn-primary float-left mb-2">Place Order</button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>Placed Orders</h4>
+                <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Placed on</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${placedPurchaseOrders}">
+                        <td th:text="${order.orderNumber}"></td>
+                        <td th:text="'$' + ${order.totalCost}"></td>
+                        <td th:text="${order.statusChangeDate}"></td>
+                        <td><a th:href="@{/purchase-orders/move/{id}(id=${order.orderNumber})}"><button class="btn btn-primary float-left mb-2">Receive Order</button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>Received Orders</h4>
+                <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Received on</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${receivedPurchaseOrders}">
+                        <td th:text="${order.orderNumber}"></td>
+                        <td th:text="'$' + ${order.totalCost}"></td>
+                        <td th:text="${order.statusChangeDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

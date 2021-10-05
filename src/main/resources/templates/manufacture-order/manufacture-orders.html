@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Manufacture Orders</div>
+
+        <p></p>
+        <a href="/add-manufacture-order"><button class="btn btn-primary float-right mb-2">Create New Order</button></a>
+        <div class="pl-3">
+            <h4>Open Orders</h4>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">Order Number</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${openManufactureOrders}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="'$' + ${order.cost}"></td>
+                    <td th:text="${order.statusChangeDate}"></td>
+                    <td><a th:href="@{/manufacture-order/delete/{id}(id=${order.orderNumber})}"><i class="fa fa-trash fa-lg pl-2" aria-hidden="true"></i></a></td>
+                    <td><a th:href="@{/manufacture-order/move/{id}(id=${order.orderNumber})}"><button class="btn btn-primary float-left mb-2">Manufacture Order</button></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h4>Manufactured Orders</h4>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">Order Number</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Manufactured on</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${manufacturedManufactureOrders}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="'$' + ${order.cost}"></td>
+                    <td th:text="${order.statusChangeDate}"></td>
+                    <td><a th:href="@{/manufacture-order/move/{id}(id=${order.orderNumber})}"><button class="btn btn-primary float-left mb-2">Pack Order</button></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h4>Packaged Orders</h4>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Packed on</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${packagedManufactureOrders}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="'$' + ${order.cost}"></td>
+                    <td th:text="${order.statusChangeDate}"></td>
+                    <td><a th:href="@{/manufacture-order/move/{id}(id=${order.orderNumber})}"><button class="btn btn-primary float-left mb-2">Store Order</button></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>Stored Orders</h4>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Stored on</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${storedManufactureOrders}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="${order.cost}"></td>
+                    <td th:text="${order.statusChangeDate}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

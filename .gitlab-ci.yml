@@ -1,0 +1,53 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: maven:3.3.9-jdk-8
+  script:
+    - mvn clean compile
+  tags:
+    - dalfcs_docker_kvm
+
+test:
+  stage: test
+  image: maven:3.3.9-jdk-8
+  script:
+    - mvn clean verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+  tags:
+    - dalfcs_docker_kvm
+
+deploy_test:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_TEST --api-key=$HEROKU_API_KEY
+  environment:
+    name: test
+    url: https://food-cpg-management-test.herokuapp.com
+  only:
+    - develop
+  tags:
+    - dalfcs_docker_kvm
+
+deploy_production:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  environment:
+    name: production
+    url: https://food-cpg-management-production.herokuapp.com
+  only:
+    - master
+  tags:
+    - dalfcs_docker_kvm

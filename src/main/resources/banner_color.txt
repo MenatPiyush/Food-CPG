@@ -1,0 +1,29 @@
+${Ansi.GREEN}
+${Ansi.GREEN}
+${Ansi.GREEN}	 _____               _    ____ ____   ____
+${Ansi.GREEN}	|  ___|__   ___   __| |  / ___|  _ \ / ___|
+${Ansi.GREEN}	| |_ / _ \ / _ \ / _` | | |   | |_) | |  _
+${Ansi.GREEN}	|  _| (_) | (_) | (_| | | |___|  __/| |_| |
+${Ansi.GREEN}	|_|  \___/ \___/ \__,_|  \____|_|    \____|
+${Ansi.GREEN}
+${Ansi.GREEN}	 __  __                                                   _
+${Ansi.GREEN}	|  \/  | __ _ _ __   __ _  __ _  ___ _ __ ___   ___ _ __ | |_
+${Ansi.GREEN}	| |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '_ ` _ \ / _ \ '_ \| __|
+${Ansi.GREEN}	| |  | | (_| | | | | (_| | (_| |  __/ | | | | |  __/ | | | |_
+${Ansi.GREEN}	|_|  |_|\__,_|_| |_|\__,_|\__, |\___|_| |_| |_|\___|_| |_|\__|
+${Ansi.GREEN}	                          |___/
+${Ansi.GREEN}	 ____            _
+${Ansi.GREEN}	/ ___| _   _ ___| |_ ___ _ __ ___
+${Ansi.GREEN}	\___ \| | | / __| __/ _ \ '_ ` _ \
+${Ansi.GREEN}	 ___) | |_| \__ \ ||  __/ | | | | |
+${Ansi.GREEN}	|____/ \__, |___/\__\___|_| |_| |_|
+${Ansi.GREEN}	       |___/
+${Ansi.GREEN}
+${Ansi.GREEN}
+${Ansi.GREEN}	Application Name : ${application.name}
+${Ansi.GREEN}	Application Version : ${application.version}
+${Ansi.GREEN}	Spring Boot Formatted Version : ${spring-boot.formatted-version}
+${Ansi.GREEN}	----------------------------------------------------------------
+${Ansi.RED}	 	FOOD-CPG-MANAGEMENT-SYSTEM
+${Ansi.GREEN}	----------------------------------------------------------------
+${Ansi.BLACK}

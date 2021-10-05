@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" >
+<head>
+    <title>Vendors</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div >
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="sidebar-heading">
+                <img th:src="@{/image/food_cpg_icon.png}" class="logo"/>
+            </div>
+            <span class="nav-heading">Food CPG Management System</span>
+            <div class="collapse navbar-collapse nav-actions" id="navbarSupportedContent"
+                 style="display: contents !important;">
+            </div>
+        </nav>
+        <p></p>
+        <div class="container-fluid" layout:fragment="content"></div>
+    </div>
+
+</div>
+
+<span class="module-heading pl-3">Manufacturer Detail</span>
+
+<table class="table mt-3 ml-3  w-25">
+    <tr>
+        <td scope="col">
+            <b>Company Name:</b>
+        </td>
+        <td th:text="${manufacturer.companyName}"></td>
+    </tr>
+    <tr>
+        <td scope="col">
+            <b>Email:</b>
+        </td>
+        <td th:text="${manufacturer.email}"></td>
+    </tr>
+    <tr>
+        <td scope="col">
+            <b>Contact:</b>
+        </td>
+        <td th:text="${manufacturer.contact}"></td>
+    </tr>
+    <tr>
+        <td scope="col">
+            <b>Address:</b>
+        </td>
+        <td th:text="${manufacturer.address}"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a class="btn btn-primary text-light" th:href="@{/show-registrations}">Back To List</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

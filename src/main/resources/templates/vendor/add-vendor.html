@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Vendors</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Vendor Management</span>
+
+        <p></p>
+        <div class="row pl-3">
+            <form class="col-12" th:action="@{/save-vendor}" th:object="${vendor}" method="post">
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Name <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{name}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['name']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Address</label>
+                        <textarea class="form-control col-4" th:field="*{address}"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Contact Person<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{contactPersonName}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['contactPersonName']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Email <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="email" th:field="*{contactPersonEmail}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['contactPersonEmail']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Phone <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{contactPersonPhone}"/>
+                        <span class="col-4 text-danger" th:if="*{errors['contactPersonPhone'] != null}" th:text="*{errors['contactPersonPhone']}"></span>
+                        <span class="col-4 text-danger" th:if="${#fields.hasErrors('contactPersonPhone')}" th:text="${'Invalid value'}"></span>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-8 row form-group justify-content-end">
+                        <button class="col-1 btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Submit</button>
+                        <a class="col-1 float-right mr-1" href="/vendors"><button class="btn btn-primary" type="button">Cancel</button></a>
+                        <span class="col-6"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

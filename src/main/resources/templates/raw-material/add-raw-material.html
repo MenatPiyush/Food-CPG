@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Raw Materials</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Raw Material Management</span>
+
+        <p></p>
+        <div class="row pl-3">
+            <form class="col-12" th:action="@{/save-raw-material}" th:object="${rawMaterial}" method="post">
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Name <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{name}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['name']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Vendor <sup class="text-danger">*</sup></label>
+                        <select class="form-control col-4" th:field="*{vendorId}">
+                            <option th:each="i : ${vendors}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                        <span class="col-4 text-danger" th:text="*{errors['vendor']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Unit Cost <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="number" step=".01" th:field="*{unitCost}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['unitCost']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Unit measurement<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-2 mr-2" type="number" step=".01" th:field="*{unitMeasurement}"/>
+                        <select class="form-control col-1" th:field="*{unitMeasurementUOM}">
+                            <option th:each="i : ${units}" th:value="${i.alias}" th:text="${i.alias}"></option>
+                        </select>
+                        <span class="col-4 text-danger" th:text="*{errors['unitMeasurement']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Re Order Point<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-2 mr-2" type="number" step=".01" th:field="*{reorderPointQuantity}"/>
+                        <select class="form-control col-1" th:field="*{reorderPointQuantityUOM}">
+                            <option th:each="i : ${units}" th:value="${i.alias}" th:text="${i.alias}"></option>
+                        </select>
+                        <span class="col-4 text-danger" th:text="*{errors['reorderPointQuantity']}"></span>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-8 row form-group justify-content-end">
+                        <button class="col-1 btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Submit</button>
+                        <a class="col-1 float-right mr-1" href="/raw-materials"><button class="btn btn-primary" type="button">Cancel</button></a>
+                        <span class="col-6"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

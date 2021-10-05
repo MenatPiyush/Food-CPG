@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Raw Material Inventory</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Raw Material Inventory Management</span>
+        <div class="pl-3">
+            <form class="row" th:action="@{/save-raw-materials-inventory-quantity}" th:object="${rawMaterialInventory}" method="post">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-5 row form-group">
+                            <label class="col-form-label col-6">Raw material: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <select class="form-control col-5" th:field="*{rawMaterialId}">
+                            <option th:each="i : ${rawMaterialInventoryList}" th:value="${i.rawMaterialId}" th:text="${i.rawMaterialName}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-5">Quantity: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-5" type="text" th:field="*{rawMaterialQuantity}"/>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-5">Quantity UOM: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-5" type="text" th:field="*{rawMaterialQuantityUOM}"/>
+                    </div>
+                </div>
+                <div class="col-6 mt-4">
+                    <a class="col-1 float-right mr-1" href="/raw-materials-inventory"><button class="btn btn-primary" type="button">Cancel</button></a>
+                    <button class="btn btn-primary float-right mr-2" name="action" value="submit" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

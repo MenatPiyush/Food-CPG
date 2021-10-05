@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Packages</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Package Management</div>
+
+        <p></p>
+        <a href="/add-packages"><button class="btn btn-primary float-right mb-2">Add New Package</button></a>
+        <div class="pl-3" th:switch="${packages}">
+            <h5 th:case="null">No packages are available! Please add a new package!</h5>
+            <div th:case="*">
+                <h4>Packages</h4>
+                <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Package Name</th>
+                        <th scope="col">Item Quantity</th>
+                        <th scope="col">Manufacturing Cost</th>
+                        <th scope="col">Wholesale Cost</th>
+                        <th scope="col">Retail Cost</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="packages : ${packages}">
+                        <td th:text="${packages.packageId}"></td>
+                        <td th:text="${packages.packageName}"></td>
+                        <td th:text="${packages.quantity}"></td>
+                        <td th:text="'$' + ${packages.manufacturingCost}"></td>
+                        <td th:text="'$' + ${packages.wholesaleCost}"></td>
+                        <td th:text="'$' + ${packages.retailCost}"></td>
+                        <td><a th:href="@{/packages/edit/{id}(id=${packages.packageId})}"><i class="fa fa-pencil fa-lg pl-2" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/packages/delete/{id}(id=${packages.packageId})}"><i class="fa fa-trash fa-lg pl-2" aria-hidden="true"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

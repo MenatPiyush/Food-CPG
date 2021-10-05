@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Packages</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Package Management</span>
+
+        <p></p>
+        <div class="row pl-3">
+            <form class="col-12" th:action="@{/save-packages/{id}(id=${packages.packageId})}" th:object="${packages}" method="post">
+                <input class="form-control col-4" type="hidden" th:field="*{packageId}"/>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Item <sup class="text-danger">*</sup></label>
+                        <select class="form-control col-4" th:field="*{itemId}">
+                            <option th:each="i : ${item}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                        <span class="col-4 text-danger" th:text="*{errors['item']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Package Name <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{packageName}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['packageNmae']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Quantity <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{quantity}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['quantity']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Manufacturing Cost <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{manufacturingCost}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['manufacturingCost']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Wholesale Cost <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{wholesaleCost}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['wholesaleCost']}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 row form-group">
+                        <label class="col-form-label col-2">Retail Cost <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{retailCost}"/>
+                        <span class="col-4 text-danger" th:text="*{errors['retailCost']}"></span>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-8 row form-group justify-content-end ">
+                        <button class="col-1 btn btn-primary float-right mr-1 " name="action" value="submit" type="submit">Submit</button>
+                        <button class="col-1 btn btn-primary float-right mr-1 " name="action" value="cancel" type="submit">Cancel</button>
+                        <span class="col-6"></span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

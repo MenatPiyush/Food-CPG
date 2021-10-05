@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Manufacture Orders</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Manufacture Order Management</span>
+
+        <p></p>
+        <div class="pl-3">
+            <form th:action="@{/save-manufacture-order}" th:object="${manufactureOrder}" method="post" class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-form-label col-4">Order Number: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="hidden" th:field="*{orderNumber}"/>
+                        <label class="col-form-label col-4 pl-0" th:text="*{orderNumber}"></label>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Items :</label>
+                        <select class="form-control col-4" th:field="*{itemId}">
+                            <option th:each="i : ${items}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-form-label col-4">Quantity<sup class="text-danger">*</sup></label>
+                        <input class="form-control col-2 mr-2" type="number" step=".01" th:field="*{itemQuantity}"/>
+                        <select class="form-control col-2" th:field="*{itemQuantityUOM}">
+                            <option th:each="i : ${units}" th:value="${i.alias}" th:text="${i.alias}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Manufacturing Cost: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{manufacturingCost}"/>
+                    </div>
+                </div>
+                <div class="col-6 mt-2">
+                    <div class="row">
+                    <label class="col-form-label col-4">Tax: <sup class="text-danger">*</sup></label>
+                    <input class="col-form-label col-4" type="text" th:field="*{tax}"/>
+                    </div>
+                </div>
+                <div class="col-6 mt-2">
+                    <label class="col-form-label col-4">Total Cost: <sup class="text-danger">*</sup></label>
+                    <input class="form-control col-4" type="hidden" th:field="*{cost}"/>
+                    <label class="col-form-label col-4 pl-0" th:text="*{cost}"></label>
+                </div>
+                <div class="col-12">
+                    <div class="col-2 row form-group justify-content-end mt-2">
+                        <button class="btn btn-primary" name="action" th:formaction="'/calculate-total'" value="calculateTotal" type="submit">Calculate Total Cost</button>
+                    </div>
+                </div>
+                <div class="col-6 mt-4">
+                    <a class="col-1 float-right mr-1" href="/manufacture-orders"><button class="btn btn-primary" type="button">Cancel</button></a>
+                    <button class="btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Create Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Balance Sheet</div>
+
+        <p></p>
+        <form class="col-12" th:action="@{/load-order-statistics}" th:object="${orderStatistics}" method="post">
+            <h3>Total Orders</h3>
+            <div class="row">
+                <table class="table table-striped table-bordered table-sm mt-4" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Total no of orders</th>
+                        <th scope="col">Total purchase orders</th>
+                        <th scope="col">Total manufacture orders</th>
+                        <th scope="col">Total sales orders</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="*{totalOrders}"></td>
+                        <td th:text="*{totalPurchaseOrders}"></td>
+                        <td th:text="*{totalManufactureOrders}"></td>
+                        <td th:text="*{totalSalesOrders}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Purchase Orders Stats</h3>
+                <table class="table table-striped table-bordered table-sm mt-4" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Total open purchase orders</th>
+                        <th scope="col">Total placed purchase orders</th>
+                        <th scope="col">Total received purchase orders</th>
+                        <th scope="col">Total paid purchase orders</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="*{totalOpenPurchaseOrders}"></td>
+                        <td th:text="*{totalPlacedPurchaseOrders}"></td>
+                        <td th:text="*{totalReceivedPurchaseOrders}"></td>
+                        <td th:text="*{totalPaidPurchaseOrders}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Manufacture Orders Stats</h3>
+                <table class="table table-striped table-bordered table-sm mt-4" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Total open manufacture orders</th>
+                        <th scope="col">Total manufactured manufacture orders</th>
+                        <th scope="col">Total packaged manufacture orders</th>
+                        <th scope="col">Total stored manufacture orders</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="*{totalOpenManufactureOrders}"></td>
+                        <td th:text="*{totalManufacturedManufactureOrders}"></td>
+                        <td th:text="*{totalPackagedManufactureOrders}"></td>
+                        <td th:text="*{totalStoredManufactureOrders}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Sales Orders Stats</h3>
+                <table class="table table-striped table-bordered table-sm mt-4" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Total open sales orders</th>
+                        <th scope="col">Total packaged sales orders</th>
+                        <th scope="col">Total shipped sales orders</th>
+                        <th scope="col">Total paid sales orders</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="*{totalOpenSalesOrders}"></td>
+                        <td th:text="*{totalPackagedSalesOrders}"></td>
+                        <td th:text="*{totalShippedSalesOrders}"></td>
+                        <td th:text="*{totalPaidSalesOrders}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

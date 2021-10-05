@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <div class="module-heading pl-3 text-center">Balance Sheet</div>
+
+        <p></p>
+        <form class="col-12" th:action="@{/load-balance-sheet}" th:object="${balanceSheet}" method="post">
+            <div class="row">
+                <label class="col-form-label mr-2">Date Range: </label>
+                <input class="form-control col-2 mr-2" type="date" th:field="*{startDate}" />
+                <input class="form-control col-2 mr-2" type="date" th:field="*{endDate}" />
+                <button class="col-1 btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Go</button>
+            </div>
+            <div class="row">
+                <table class="table table-striped table-bordered table-sm mt-4" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Expenditure</th>
+                        <th scope="col">Revenue</th>
+                        <th scope="col">For charity</th>
+                        <th scope="col">Net Income</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="'$' + *{expenditure}"></td>
+                        <td th:text="'$' + *{revenue}"></td>
+                        <td th:text="'$' + *{amountUsedForCharity}"></td>
+                        <td th:text="'$' + *{netIncome}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

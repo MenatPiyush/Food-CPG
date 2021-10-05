@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org" layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Sales Orders</title>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <span class="module-heading pl-3">Sales Order Management</span>
+
+        <p></p>
+        <div class="pl-3">
+            <form th:action="@{/save-sales-order}" th:object="${salesOrder}" method="post" class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-form-label col-4">Order Number: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="hidden" th:field="*{orderNumber}"/>
+                        <label class="col-form-label col-4 pl-0" th:text="*{orderNumber}"></label>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Items :</label>
+                        <select class="form-control col-4" th:field="*{itemId}">
+                            <option th:each="i : ${items}" th:value="${i.id}" th:text="${i.name}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Packages :</label>
+                        <select class="form-control col-4" th:field="*{packageId}">
+                            <option th:each="p : ${packages}" th:value="${p.packageId}" th:text="${p.packageName}"></option>
+                        </select>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Package Cost: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{packageCost}"/>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Buyer details: <sup class="text-danger">*</sup></label>
+                        <textarea class="form-control col-4" rows = "5" th:field="*{buyerDetails}"></textarea>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row mt-2">
+                        <label class="col-form-label col-sm-2">For Charity: </label>
+                        <input class="form-control col-sm-2" type="checkbox" th:field="*{isForCharity}"/>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-form-label col-4">Shipping Cost: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="text" th:field="*{shippingCost}"/>
+                    </div>
+                    <div class="row">
+                        <label class="col-form-label col-4">Tax: <sup class="text-danger">*</sup></label>
+                        <input class="col-form-label col-4" type="text" th:field="*{tax}"/>
+                    </div>
+                    <div class="col-6 mt-2">
+                        <label class="col-form-label col-4">Total Cost: <sup class="text-danger">*</sup></label>
+                        <input class="form-control col-4" type="hidden" th:field="*{totalCost}"/>
+                        <label class="col-form-label col-4 pl-0" th:text="*{totalCost}"></label>
+                    </div>
+                    <div class="col-2 row form-group justify-content-end mt-2">
+                        <button class="btn btn-primary" name="action" th:formaction="'/calculate-sales-total'" value="calculateTotal" type="submit">Calculate Total Cost</button>
+                    </div>
+
+
+                </div>
+
+                <div class="col-6 mt-4">
+                    <a class="col-1 float-right mr-1" href="/sales-orders"><button class="btn btn-primary" type="button">Cancel</button></a>
+                    <button class="btn btn-primary float-right mr-1" name="action" value="submit" type="submit">Create Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
